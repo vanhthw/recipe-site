@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom styles for Ant Design dropdown */
+.header-dropdown .ant-dropdown-menu {
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f1f5f9;
+}
+
+.header-dropdown .ant-dropdown-menu-item {
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 500;
+}
+
+.header-dropdown .ant-dropdown-menu-item:hover {
+  background: linear-gradient(to right, #fef3c7, #fed7aa);
+}
+
+/* Custom styles for Recipe Steps */
+.recipe-steps .ant-steps-item-process .ant-steps-item-icon {
+  background: linear-gradient(to right, #fbbf24, #f97316) !important;
+  border-color: transparent !important;
+}
+
+.recipe-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background: #22c55e !important;
+  border-color: transparent !important;
+}
+
+.recipe-steps .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon {
+  color: white !important;
+}
+
+.recipe-steps .ant-steps-item-finish .ant-steps-item-tail::after {
+  background-color: #22c55e !important;
+}
+
+.recipe-steps .ant-steps-item-process .ant-steps-item-tail::after {
+  background: linear-gradient(to right, #fbbf24, #f97316) !important;
+}
+
+.recipe-steps .ant-steps-item-title {
+  font-size: 13px !important;
+}
+
+.recipe-steps .ant-steps-item-description {
+  color: #94a3b8 !important;
+}
+
+
