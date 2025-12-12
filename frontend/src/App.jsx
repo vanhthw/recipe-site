@@ -9,6 +9,7 @@ import About from './pages/About';
 
 function App() {
   return (
+    // bọc cái app lại vào BrowserRouter để dùng được react-router-dom
     <BrowserRouter>
       <Routes>
         {/* User Layout Routes */}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   HeartOutlined,
   ShoppingCartOutlined,
@@ -14,6 +14,7 @@ import { Badge, Avatar, Dropdown } from 'antd';
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const location = useLocation();
 
   const navItems = [
     { label: 'Trang chủ', path: '/' },
@@ -81,16 +82,27 @@ const Header = () => {
 
             {/* Navigation - Desktop */}
             <nav className="hidden xl:flex items-center gap-1">
-              {navItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.path}
-                  className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-amber-600 transition-colors group"
-                >
-                  {item.label}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
-                </Link>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={index}
+                    to={item.path}
+                    className={`relative px-4 py-2 text-sm font-medium transition-colors group ${
+                      isActive 
+                        ? 'text-amber-600' 
+                        : 'text-slate-600 hover:text-amber-600'
+                    }`}
+                  >
+                    {item.label}
+                    <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 rounded-full ${
+                      isActive 
+                        ? 'w-3/4' 
+                        : 'w-0 group-hover:w-3/4'
+                    }`}></span>
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Actions */}
@@ -174,17 +186,28 @@ const Header = () => {
         <div className={`xl:hidden overflow-hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-96' : 'max-h-0'}`}>
           <nav className="bg-gradient-to-b from-slate-50 to-white border-t border-slate-100">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
-              {navItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-amber-600 hover:bg-amber-50 rounded-xl font-medium transition-all"
-                >
-                  <span className="w-1.5 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full"></span>
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={index}
+                    to={item.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
+                      isActive 
+                        ? 'text-amber-600 bg-amber-50' 
+                        : 'text-slate-600 hover:text-amber-600 hover:bg-amber-50'
+                    }`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-600 scale-125' 
+                        : 'bg-gradient-to-r from-amber-400 to-orange-500'
+                    }`}></span>
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </nav>
         </div>
